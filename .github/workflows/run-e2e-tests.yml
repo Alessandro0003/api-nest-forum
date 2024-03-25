@@ -23,11 +23,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 18
-          cache: 'npm'
+          cache: 'pnpm'
       
-      - run: npm ci
+      - run: pnpm ci
 
-      - run: npm run test:e2e
+      - run: pnpm run test:e2e
         env:
           JWT_PRIVATE_KEY: testing
           JWT_PUBLIC_KEY: testing
