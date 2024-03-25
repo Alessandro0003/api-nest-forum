@@ -26,7 +26,6 @@ jobs:
           cache: 'npm'
       
       - run: npm ci
-
       - run: npm run test:e2e
         env:
           DATABASE_URL: "postgresql://postgres:docker@localhost:5432/nest-clean?schema=public"
