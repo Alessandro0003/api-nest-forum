@@ -28,4 +28,6 @@ jobs:
       - run: npm ci
       - run: npm run test:e2e
         env:
+          JWT_PRIVATE_KEY: testing
+          JWT_PUBLIC_KEY: testing
           DATABASE_URL: "postgresql://postgres:docker@localhost:5432/nest-clean?schema=public"
