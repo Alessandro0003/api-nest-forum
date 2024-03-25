@@ -23,11 +23,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'pnpm'
+          cache: 'npm'
         
-      - run: pnpm ci
+      - run: npm ci
 
-      - run: pnpm run test:e2e
+      - run: npm run test:e2e
         env:
           JWT_SECRET: testing
           DATABASE_URL: "postgresql://postgres:docker@localhost:5432/nest-clean?schema=public"
