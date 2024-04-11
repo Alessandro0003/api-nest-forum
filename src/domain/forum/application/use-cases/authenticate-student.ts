@@ -12,13 +12,15 @@ interface AuthenticateStudentUseCaseRequest {
 
 type AuthenticateStudentUseCaseResponse = Either<
   WrongCredentialsError,
-  { accessToken: string }
+  {
+    accessToken: string
+  }
 >
 
 @Injectable()
 export class AuthenticateStudentUseCase {
   constructor(
-    private readonly studentsRepository: StudentsRepository,
+    private studentsRepository: StudentsRepository,
     private hashComparer: HashComparer,
     private encrypter: Encrypter,
   ) {}
