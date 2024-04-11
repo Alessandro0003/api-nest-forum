@@ -36,7 +36,7 @@ model Question {
   bestAnswerId String?   @unique @map("best_answer_id")
 
   author     User    @relation(fields: [authorId], references: [id])
-  bestAnswer Answer? @relation("bestAnswer", fields: [bestAnswerId], references: [id])
+  bestAnswer Answer? @relation("bestAnswerOn", fields: [bestAnswerId], references: [id])
 
   answers Answer[]
 
@@ -52,7 +52,7 @@ model Answer {
   questionId String    @map("question_id")
 
   author       User      @relation(fields: [authorId], references: [id])
-  bestAnswerOn Question? @relation("bestAnswer")
+  bestAnswerOn Question? @relation("bestAnswerOn")
   question     Question  @relation(fields: [questionId], references: [id])
 
   @@map("answers")
