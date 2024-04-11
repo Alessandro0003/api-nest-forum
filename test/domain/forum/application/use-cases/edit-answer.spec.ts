@@ -4,7 +4,7 @@ import { NotAllowedError } from '@/core/errors/errors/not-allowed-error'
 import { makeAnswer } from 'test/factories/make-answer'
 import { makeAnswerAttachment } from 'test/factories/make-answer-attachments'
 import { InMemoryAnswersRepository } from '../repositories/in-memory-answers-repository'
-import { InMemoryAnswerAttachmentsRepository } from '../repositories/in-memory-answers-attachments.repository'
+import { InMemoryAnswerAttachmentsRepository } from '../repositories/in-memory-answers-attachments-repository'
 
 let inMemoryAnswersRepository: InMemoryAnswersRepository
 let inMemoryAnswerAttachmentsRepository: InMemoryAnswerAttachmentsRepository

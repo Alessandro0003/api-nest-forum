@@ -1,6 +1,6 @@
 import { CommentOnAnswerUseCase } from '@/domain/forum/application/use-cases/comment-on-answer'
 import { makeAnswer } from 'test/factories/make-answer'
-import { InMemoryAnswerAttachmentsRepository } from '../repositories/in-memory-answers-attachments.repository'
+import { InMemoryAnswerAttachmentsRepository } from '../repositories/in-memory-answers-attachments-repository'
 import { InMemoryAnswersRepository } from '../repositories/in-memory-answers-repository'
 import { InMemoryAnswersCommentsRepository } from '../repositories/in-memory-answers-comments-repository'
 

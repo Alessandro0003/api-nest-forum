@@ -1,7 +1,7 @@
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { FetchQuestionAnswersUseCase } from '@/domain/forum/application/use-cases/fetch-question-answers'
 import { makeAnswer } from 'test/factories/make-answer'
-import { InMemoryAnswerAttachmentsRepository } from '../repositories/in-memory-answers-attachments.repository'
+import { InMemoryAnswerAttachmentsRepository } from '../repositories/in-memory-answers-attachments-repository'
 import { InMemoryAnswersRepository } from '../repositories/in-memory-answers-repository'
 
 let inMemoryAnswerAttachmentsRepository: InMemoryAnswerAttachmentsRepository

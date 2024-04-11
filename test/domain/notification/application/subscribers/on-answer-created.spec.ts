@@ -4,7 +4,7 @@ import {
   SendNotificationUseCaseRequest,
   SendNotificationUseCaseResponse,
 } from '@/domain/notification/application/use-cases/send-notification'
-import { InMemoryAnswerAttachmentsRepository } from 'test/domain/forum/application/repositories/in-memory-answers-attachments.repository'
+import { InMemoryAnswerAttachmentsRepository } from 'test/domain/forum/application/repositories/in-memory-answers-attachments-repository'
 import { InMemoryAnswersRepository } from 'test/domain/forum/application/repositories/in-memory-answers-repository'
 import { InMemoryQuestionAttachmentsRepository } from 'test/domain/forum/application/repositories/in-memory-question-attachments-repository'
 import { InMemoryQuestionRepository } from 'test/domain/forum/application/repositories/in-memory-questions-repository'
