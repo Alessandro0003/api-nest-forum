@@ -1,5 +1,5 @@
-import { AppModule } from '@/infra/app.module'
-import { PrismaService } from '@/infra/database/prisma/prisma.service'
+import { AppModule } from '../../app.module'
+import { PrismaService } from '../../database/prisma/prisma.service'
 import { INestApplication } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { Test } from '@nestjs/testing'
@@ -37,14 +37,14 @@ describe('Fetch recent questions (E2E)', () => {
     await prisma.question.createMany({
       data: [
         {
-          title: 'Question 03',
-          slug: 'question-03',
+          title: 'Question 01',
+          slug: 'question-01',
           content: 'Question content',
           authorId: user.id,
         },
         {
-          title: 'Question 04',
-          slug: 'question-04',
+          title: 'Question 02',
+          slug: 'question-02',
           content: 'Question content',
           authorId: user.id,
         },
@@ -57,11 +57,10 @@ describe('Fetch recent questions (E2E)', () => {
       .send()
 
     expect(response.statusCode).toBe(200)
-
     expect(response.body).toEqual({
-      question: [
-        expect.objectContaining({ title: 'Question 03' }),
-        expect.objectContaining({ title: 'Question 04' }),
+      questions: [
+        expect.objectContaining({ title: 'Question 01' }),
+        expect.objectContaining({ title: 'Question 02' }),
       ],
     })
   })
