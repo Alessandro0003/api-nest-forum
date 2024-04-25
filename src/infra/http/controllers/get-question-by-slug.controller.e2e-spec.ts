@@ -44,7 +44,7 @@ describe('Get question by slug (E2E)', () => {
     })
 
     const response = await request(app.getHttpServer())
-      .get(`/questions/question-01`)
+      .get('/questions/question-01')
       .set('Authorization', `Bearer ${accessToken}`)
       .send()
 

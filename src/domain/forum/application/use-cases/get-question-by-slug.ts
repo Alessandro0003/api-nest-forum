@@ -15,7 +15,7 @@ type GetQuestionBySlugUseCaseResponse = Either<
 
 @Injectable()
 export class GetQuestionBySlugUseCase {
-  constructor(private readonly questionRepository: QuestionRepository) {}
+  constructor(private questionRepository: QuestionRepository) {}
 
   async execute({
     slug,
@@ -25,8 +25,6 @@ export class GetQuestionBySlugUseCase {
     if (!question) {
       return left(new ResourceNotFoundError())
     }
-
-    await this.questionRepository.create(question)
 
     return right({ question })
   }
