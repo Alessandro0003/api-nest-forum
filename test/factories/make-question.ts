@@ -37,6 +37,7 @@ export class QuestionFactory {
     await this.prisma.question.create({
       data: PrismaQuestionMapper.toPrisma(question),
     })
+
     return question
   }
 }
