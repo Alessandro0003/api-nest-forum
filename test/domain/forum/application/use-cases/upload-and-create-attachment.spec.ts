@@ -2,7 +2,7 @@ import { InMemoryAttachmentsRepository } from '../repositories/in-memory-attachm
 import { UploadAndCreateAttachmentUseCase } from '@/domain/forum/application/use-cases/upload-and-create-attachment'
 import { FakeUploader } from 'test/storage/fake-uploader'
 import { NotAllowedError } from '@/core/errors/errors/not-allowed-error'
-import { InvalidAttachmentType } from '@/domain/forum/application/use-cases/errors/invalid-attachment-type'
+import { InvalidAttachmentTypeError } from '@/domain/forum/application/use-cases/errors/invalid-attachment-type'
 
 let inMemoryAttachmentsRepository: InMemoryAttachmentsRepository
 let fakeUploader: FakeUploader
@@ -47,6 +47,6 @@ describe('Upload and create attachment', () => {
     })
 
     expect(result.isLeft()).toBe(true)
-    expect(result.value).toBeInstanceOf(InvalidAttachmentType)
+    expect(result.value).toBeInstanceOf(InvalidAttachmentTypeError)
   })
 })
