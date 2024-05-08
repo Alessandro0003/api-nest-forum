@@ -1,22 +1,18 @@
 import { Either, left, right } from '@/core/either'
 import { Injectable } from '@nestjs/common'
-import { Student } from '../../enterprise/entities/student'
-import { StudentsRepository } from '../repositories/students-repository'
-import { HashGenerator } from '../cryptography/hash-generator'
-import { StudentAlreadyExistsError } from './errors/student-already-exists-error'
-import { InvalidAttachmentType } from './errors/invalid-attachment-type'
 import { Attachment } from '../../enterprise/entities/attachment'
 import { AttachmentsRepository } from '../repositories/attachments-repository'
 import { Uploader } from '../storage/uploader'
+import { InvalidAttachmentTypeError } from './errors/invalid-attachment-type'
 
-interface UploadAndCreateAttachmentUseCaseRequest {
+interface UploadAndCreateAttachmentRequest {
   fileName: string
   fileType: string
   body: Buffer
 }
 
-type UploadAndCreateAttachmentUseCaseResponse = Either<
-  InvalidAttachmentType,
+type UploadAndCreateAttachmentResponse = Either<
+  InvalidAttachmentTypeError,
   { attachment: Attachment }
 >
 
@@ -31,16 +27,12 @@ export class UploadAndCreateAttachmentUseCase {
     fileName,
     fileType,
     body,
-  }: UploadAndCreateAttachmentUseCaseRequest): Promise<UploadAndCreateAttachmentUseCaseResponse> {
-    if (!/^(image\/(jpeg|jpg|png))$|^application\/pdf$/.test(fileType)) {
-      return left(new InvalidAttachmentType(fileType))
+  }: UploadAndCreateAttachmentRequest): Promise<UploadAndCreateAttachmentResponse> {
+    if (!/^(image\/(jpeg|png))$|^application\/pdf$/.test(fileType)) {
+      return left(new InvalidAttachmentTypeError(fileType))
     }
 
-    const { url } = await this.uploader.upload({
-      fileName,
-      fileType,
-      body,
-    })
+    const { url } = await this.uploader.upload({ fileName, fileType, body })
 
     const attachment = Attachment.create({
       title: fileName,
