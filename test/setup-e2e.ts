@@ -13,9 +13,10 @@ const env = envSchema.parse(process.env)
 const prisma = new PrismaClient()
 
 function generateUniqueDatabaseURL(schemaId: string) {
-  if (!process.env.DATABASE_URL) {
-    throw new Error('Please provider a DATABASE_URL environment variable.')
+  if (!env.DATABASE_URL) {
+    throw new Error('Please provider a DATABASE_URL environment variable')
   }
+
   const url = new URL(env.DATABASE_URL)
 
   url.searchParams.set('schema', schemaId)
