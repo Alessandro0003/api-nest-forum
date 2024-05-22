@@ -27,10 +27,6 @@ export class PrismaQuestionAttachmentsRepository
       return
     }
 
-    // const attachmentIds = attachments.map((attachment) => {
-    //   return attachment.id.toString()
-    // })
-
     const data = PrismaQuestionAttachmentMapper.toPrismaUpdateMany(attachments)
 
     await this.prisma.attachment.updateMany(data)
