@@ -1,4 +1,5 @@
 import { faker } from '@faker-js/faker'
+
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import {
   Attachment,
@@ -36,6 +37,7 @@ export class AttachmentFactory {
     await this.prisma.attachment.create({
       data: PrismaAttachmentMapper.toPrisma(attachment),
     })
+
     return attachment
   }
 }
