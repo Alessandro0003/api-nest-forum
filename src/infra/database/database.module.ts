@@ -5,7 +5,6 @@ import { PrismaQuestionCommentsRepository } from './prisma/repositories/prisma-q
 import { PrismaQuestionAttachmentsRepository } from './prisma/repositories/prisma-question-attachment-repository'
 import { PrismaAnswersRepository } from './prisma/repositories/prisma-answers-repository'
 import { PrismaAnswersCommentsRepository } from './prisma/repositories/prisma-answers-comments-repository'
-import { PrismaAnswersAttachmentRepository } from './prisma/repositories/prisma-answers-attachment-repository'
 import { QuestionRepository } from '@/domain/forum/application/repositories/question-repository'
 import { StudentsRepository } from '@/domain/forum/application/repositories/students-repository'
 import { PrismaStudentsRepository } from './prisma/repositories/prisma-students-repository'
@@ -16,6 +15,7 @@ import { AnswersCommentsRepository } from '@/domain/forum/application/repositori
 import { AnswerAttachmentsRepository } from '@/domain/forum/application/repositories/answers-attachment-repository'
 import { AttachmentsRepository } from '@/domain/forum/application/repositories/attachments-repository'
 import { PrismaAttachmentsRepository } from './prisma/repositories/prisma-attachments-repository'
+import { PrismaAnswerAttachmentsRepository } from './prisma/repositories/prisma-answers-attachment-repository'
 
 @Module({
   providers: [
@@ -48,7 +48,7 @@ import { PrismaAttachmentsRepository } from './prisma/repositories/prisma-attach
     },
     {
       provide: AnswerAttachmentsRepository,
-      useClass: PrismaAnswersAttachmentRepository,
+      useClass: PrismaAnswerAttachmentsRepository,
     },
     {
       provide: AttachmentsRepository,
