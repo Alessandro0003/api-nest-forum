@@ -11,7 +11,7 @@ export interface CommentWithAuthorProps {
 }
 
 export class CommentWithAuthor extends ValueObject<CommentWithAuthorProps> {
-  get commendId() {
+  get commentId() {
     return this.props.commentId
   }
 
