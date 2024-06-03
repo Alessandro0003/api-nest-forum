@@ -3,9 +3,13 @@ import { makeQuestion } from 'test/factories/make-question'
 import { InMemoryQuestionAttachmentsRepository } from '../repositories/in-memory-question-attachments-repository'
 import { InMemoryQuestionRepository } from '../repositories/in-memory-questions-repository'
 import { InMemoryQuestionCommentsRepository } from '../repositories/in-memory-question-comments-repository'
+import { InMemoryAttachmentsRepository } from '../repositories/in-memory-attachments-repository'
+import { InMemoryStudentRepository } from '../repositories/in-memory-student-repository'
 
 let inMemoryQuestionAttachmentsRepository: InMemoryQuestionAttachmentsRepository
 let inMemoryQuestionRepository: InMemoryQuestionRepository
+let inMemoryAttachmentsRepository: InMemoryAttachmentsRepository
+let inMemoryStudentRepository: InMemoryStudentRepository
 let inMemoryQuestionCommentsRepository: InMemoryQuestionCommentsRepository
 let sut: CommentOnQuestionUseCase
 
@@ -13,11 +17,20 @@ describe('Comment On Question', () => {
   beforeEach(() => {
     inMemoryQuestionAttachmentsRepository =
       new InMemoryQuestionAttachmentsRepository()
+
+    inMemoryAttachmentsRepository = new InMemoryAttachmentsRepository()
+
+    inMemoryStudentRepository = new InMemoryStudentRepository()
+
     inMemoryQuestionRepository = new InMemoryQuestionRepository(
       inMemoryQuestionAttachmentsRepository,
+      inMemoryAttachmentsRepository,
+      inMemoryStudentRepository,
     )
-    inMemoryQuestionCommentsRepository =
-      new InMemoryQuestionCommentsRepository()
+
+    inMemoryQuestionCommentsRepository = new InMemoryQuestionCommentsRepository(
+      inMemoryStudentRepository,
+    )
 
     sut = new CommentOnQuestionUseCase(
       inMemoryQuestionRepository,

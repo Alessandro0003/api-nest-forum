@@ -5,17 +5,28 @@ import { makeQuestion } from 'test/factories/make-question'
 import { makeQuestionAttachment } from 'test/factories/make-question-attachments'
 import { InMemoryQuestionRepository } from '../repositories/in-memory-questions-repository'
 import { InMemoryQuestionAttachmentsRepository } from '../repositories/in-memory-question-attachments-repository'
+import { InMemoryAttachmentsRepository } from '../repositories/in-memory-attachments-repository'
+import { InMemoryStudentRepository } from '../repositories/in-memory-student-repository'
 
 let inMemoryQuestionRepository: InMemoryQuestionRepository
 let inMemoryQuestionAttachmentsRepository: InMemoryQuestionAttachmentsRepository
+let inMemoryAttachmentsRepository: InMemoryAttachmentsRepository
+let inMemoryStudentRepository: InMemoryStudentRepository
 let sut: DeleteQuestionUseCase
 
 describe('Delete Question', () => {
   beforeEach(() => {
+    inMemoryAttachmentsRepository = new InMemoryAttachmentsRepository()
+
+    inMemoryStudentRepository = new InMemoryStudentRepository()
+
     inMemoryQuestionAttachmentsRepository =
       new InMemoryQuestionAttachmentsRepository()
+
     inMemoryQuestionRepository = new InMemoryQuestionRepository(
       inMemoryQuestionAttachmentsRepository,
+      inMemoryAttachmentsRepository,
+      inMemoryStudentRepository,
     )
     sut = new DeleteQuestionUseCase(inMemoryQuestionRepository)
   })

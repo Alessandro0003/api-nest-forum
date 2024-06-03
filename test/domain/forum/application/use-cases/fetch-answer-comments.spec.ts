@@ -1,31 +1,38 @@
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { FetchAnswerCommentsUseCase } from '@/domain/forum/application/use-cases/fetch-answer-comments'
 import { makeAnswerComment } from 'test/factories/make-answer-comment'
-import { InMemoryAnswersCommentsRepository } from '../repositories/in-memory-answers-comments-repository'
+import { InMemoryStudentRepository } from '../repositories/in-memory-student-repository'
+import { InMemoryAnswerCommentsRepository } from '../repositories/in-memory-answers-comments-repository'
 
-let inMemoryAnswersCommentsRepository: InMemoryAnswersCommentsRepository
+let inMemoryAnswerCommentsRepository: InMemoryAnswerCommentsRepository
+let inMemoryStudentRepository: InMemoryStudentRepository
 let sut: FetchAnswerCommentsUseCase
 
 describe('Fetch Answer Comments', () => {
   beforeEach(() => {
-    inMemoryAnswersCommentsRepository = new InMemoryAnswersCommentsRepository()
-    sut = new FetchAnswerCommentsUseCase(inMemoryAnswersCommentsRepository)
+    inMemoryStudentRepository = new InMemoryStudentRepository()
+
+    inMemoryAnswerCommentsRepository = new InMemoryAnswerCommentsRepository(
+      inMemoryStudentRepository,
+    )
+
+    sut = new FetchAnswerCommentsUseCase(inMemoryAnswerCommentsRepository)
   })
 
   it('should be able to fetch answer comments', async () => {
-    await inMemoryAnswersCommentsRepository.create(
+    await inMemoryAnswerCommentsRepository.create(
       makeAnswerComment({
         answerId: new UniqueEntityID('answer-1'),
       }),
     )
 
-    await inMemoryAnswersCommentsRepository.create(
+    await inMemoryAnswerCommentsRepository.create(
       makeAnswerComment({
         answerId: new UniqueEntityID('answer-1'),
       }),
     )
 
-    await inMemoryAnswersCommentsRepository.create(
+    await inMemoryAnswerCommentsRepository.create(
       makeAnswerComment({
         answerId: new UniqueEntityID('answer-1'),
       }),
@@ -41,7 +48,7 @@ describe('Fetch Answer Comments', () => {
 
   it('should be able to fetch paginated answer comments', async () => {
     for (let i = 1; i <= 22; i++) {
-      await inMemoryAnswersCommentsRepository.create(
+      await inMemoryAnswerCommentsRepository.create(
         makeAnswerComment({
           answerId: new UniqueEntityID('answer-1'),
         }),

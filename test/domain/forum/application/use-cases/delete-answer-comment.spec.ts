@@ -2,29 +2,35 @@ import { makeAnswerComment } from 'test/factories/make-answer-comment'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { NotAllowedError } from '@/core/errors/errors/not-allowed-error'
 import { DeleteCommentAnswerUseCase } from '@/domain/forum/application/use-cases/delete-answer-comment'
-import { InMemoryAnswersCommentsRepository } from '../repositories/in-memory-answers-comments-repository'
+import { InMemoryAnswerCommentsRepository } from '../repositories/in-memory-answers-comments-repository'
+import { InMemoryStudentRepository } from '../repositories/in-memory-student-repository'
 
-let inMemoryAnswersCommentsRepository: InMemoryAnswersCommentsRepository
+let inMemoryAnswerCommentsRepository: InMemoryAnswerCommentsRepository
+let inMemoryStudentRepository: InMemoryStudentRepository
 let sut: DeleteCommentAnswerUseCase
 
 describe('Delete Answer Comment', () => {
   beforeEach(() => {
-    inMemoryAnswersCommentsRepository = new InMemoryAnswersCommentsRepository()
+    inMemoryStudentRepository = new InMemoryStudentRepository()
 
-    sut = new DeleteCommentAnswerUseCase(inMemoryAnswersCommentsRepository)
+    inMemoryAnswerCommentsRepository = new InMemoryAnswerCommentsRepository(
+      inMemoryStudentRepository,
+    )
+
+    sut = new DeleteCommentAnswerUseCase(inMemoryAnswerCommentsRepository)
   })
 
   it('should be able to delete answer comment ', async () => {
     const answerComment = makeAnswerComment()
 
-    await inMemoryAnswersCommentsRepository.create(answerComment)
+    await inMemoryAnswerCommentsRepository.create(answerComment)
 
     await sut.execute({
       authorId: answerComment.authorId.toString(),
       answerCommentId: answerComment.id.toString(),
     })
 
-    expect(inMemoryAnswersCommentsRepository.items).toHaveLength(0)
+    expect(inMemoryAnswerCommentsRepository.items).toHaveLength(0)
   })
 
   it('should not be able to delete another user answer comment', async () => {
@@ -32,7 +38,7 @@ describe('Delete Answer Comment', () => {
       authorId: new UniqueEntityID('author-1'),
     })
 
-    await inMemoryAnswersCommentsRepository.create(answerComment)
+    await inMemoryAnswerCommentsRepository.create(answerComment)
 
     const result = await sut.execute({
       answerCommentId: answerComment.id.toString(),
