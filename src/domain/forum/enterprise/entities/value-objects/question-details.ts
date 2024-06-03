@@ -10,7 +10,7 @@ export interface QuestionDetailsProps {
   title: string
   slug: Slug
   content: string
-  attachments: Attachment
+  attachments: Attachment[]
   bestAnswerId?: UniqueEntityID | null
   createdAt: Date
   updatedAt?: Date | null
