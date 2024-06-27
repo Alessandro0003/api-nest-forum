@@ -8,6 +8,7 @@
   "scripts": {
     "build": "nest build",
     "prisma:s": "npx prisma studio",
+    "migrate": "prisma migrate dev",
     "format": "prettier --write \"src/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
