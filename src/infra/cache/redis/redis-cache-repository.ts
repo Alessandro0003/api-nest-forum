@@ -1,6 +1,8 @@
+import { Injectable } from '@nestjs/common'
 import { CacheRepository } from '../cache-repository'
 import { RedisService } from './redis.service'
 
+@Injectable()
 export class RedisCacheRepository implements CacheRepository {
   constructor(private redis: RedisService) {}
 
